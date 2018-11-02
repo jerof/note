@@ -14,6 +14,7 @@ class PostsController < ApplicationController
 
   # GET /posts/new
   def new
+    @posts = Post.all.order("created_at DESC")
     @post = Post.new
   end
 

@@ -10,6 +10,41 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div id="sidebar">
+      <div id="logo">
+        <%= link_to root_path do %>
+          <%= image_tag "logo.svg" %>
+        <% end %>
+      </div>
+
+      <ul>
+        <li class="category">Notes</li>
+        <% @posts.each do |post| %>
+          <li><%= post.title %></li>
+        <% end %>
+      </ul>
+
+      <ul>
+        <li class="category">Social</li>
+        <li><%= link_to "Twitter", "#" %></li>
+        <li><%= link_to "Facebook", "#" %></li>
+        <li><%= link_to "Email", "#" %></li>
+      </ul>
+      <p class="sign_in">Admin Login</p>
+    </div>
+
+    <div id="main_content">
+      <div id="header">
+        <p>All Posts</p>
+        <div class="buttons">
+          <button class="button"><%= link_to "New Post", new_post_path %></button>
+          <button class="button">Log Out</button>
+        </div>
+      </div>
+      <% flash.each do |name, msg| %>
+        <%= content_tag(:div, msg, class: "alert") %>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>
